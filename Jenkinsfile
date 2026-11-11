@@ -88,6 +88,7 @@ pipeline {
                     APP_VERSION="$BUILD_NUMBER" \
                     nohup java \
                     -jar "$RELEASE_DIR/app.jar" \
+                    --server.port=8082 \
                     > "$DEPLOY_ROOT/app.log" 2>&1 &
 
                     echo $! > "$DEPLOY_ROOT/app.pid"
@@ -106,7 +107,7 @@ pipeline {
                 sh '''
                     sleep 5
                     curl -f \
-                    http://127.0.0.1:8080/api/health
+                    http://127.0.0.1:8082/api/health
                 '''
             }
         }
