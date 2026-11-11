@@ -20,6 +20,11 @@ class CalculatorServiceTest {
     }
 
     @Test
+    void shouldMultiplyNumbers() {
+        assertEquals(6, service.multiply(2, 3));
+    }
+
+    @Test
     void shouldCalculateDiscount() {
         assertEquals(
                 900,
