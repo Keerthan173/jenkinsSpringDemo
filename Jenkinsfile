@@ -97,22 +97,24 @@ pipeline {
         }
 
         stage('Smoke Test') {
-
             when {
                 branch 'main'
             }
-
             steps {
-
                 sh '''
-                    for i in {1..30}; do
+                    i=1
+
+                    while [ "$i" -le 30 ]; do
+
                         if curl -fsS http://127.0.0.1:8082/api/health; then
                             echo "Application is healthy!"
                             exit 0
                         fi
 
-                        echo "Waiting for Spring Boot to start..."
+                        echo "Waiting for Spring Boot... Attempt $i"
                         sleep 2
+                        i=$((i + 1))
+
                     done
 
                     echo "Application failed to become healthy!"
