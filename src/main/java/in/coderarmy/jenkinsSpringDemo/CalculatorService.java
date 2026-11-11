@@ -13,6 +13,10 @@ public class CalculatorService {
         return a - b;
     }
 
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
     public double discount(double price, double percentage) {
 
         if (price < 0 || percentage < 0 || percentage > 100) {
