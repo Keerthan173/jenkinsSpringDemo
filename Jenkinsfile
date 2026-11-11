@@ -105,9 +105,18 @@ pipeline {
             steps {
 
                 sh '''
-                    sleep 5
-                    curl -f \
-                    http://127.0.0.1:8082/api/health
+                    for i in {1..30}; do
+                        if curl -fsS http://127.0.0.1:8082/api/health; then
+                            echo "Application is healthy!"
+                            exit 0
+                        fi
+
+                        echo "Waiting for Spring Boot to start..."
+                        sleep 2
+                    done
+
+                    echo "Application failed to become healthy!"
+                    exit 1
                 '''
             }
         }
