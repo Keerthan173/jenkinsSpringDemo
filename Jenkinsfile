@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    tools {
+        jdk 'JDK21'
+    }
+
     options {
         skipDefaultCheckout(true)
     }
@@ -45,7 +49,7 @@ pipeline {
         stage('Deploy') {
 
             when {
-                branch 'master'
+                branch 'main'
             }
 
             steps {
@@ -94,7 +98,7 @@ pipeline {
         stage('Smoke Test') {
 
             when {
-                branch 'master'
+                branch 'main'
             }
 
             steps {
